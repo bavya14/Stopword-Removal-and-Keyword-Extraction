@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 243 246 248;
+  --surface: 255 255 255;
+  --soft: 236 241 245;
+  --ink: 14 27 43;
+  --muted: 91 107 123;
+  --line: 220 227 233;
+  --brand: 11 122 117;
+  --brand-ink: 255 255 255;
+  --mark: 255 209 102;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: 11 18 25;
+  --surface: 18 28 38;
+  --soft: 26 39 52;
+  --ink: 231 238 244;
+  --muted: 144 161 177;
+  --line: 38 54 68;
+  --brand: 60 201 191;
+  --brand-ink: 6 20 26;
+  --mark: 242 184 75;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-bg font-sans text-ink antialiased transition-colors duration-300;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--brand));
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: rgb(var(--mark) / 0.5);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-brand text-brand-ink hover:bg-brand/90;
+  }
+  .btn-secondary {
+    @apply btn border border-line bg-surface text-ink hover:bg-soft;
+  }
+  .btn-ghost {
+    @apply btn text-muted hover:bg-soft hover:text-ink;
+  }
+  .field {
+    @apply w-full rounded-xl border border-line bg-bg px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70 transition-colors focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/25;
+  }
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--line)) transparent;
+  }
+}
